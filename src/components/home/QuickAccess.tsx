@@ -1,176 +1,96 @@
 import {
   ArrowUpRight,
+  BookOpen,
   CalendarDays,
-  ClipboardList,
   FileText,
   Gavel,
   Search,
+  Scale,
 } from "lucide-react";
 
 const services = [
   {
     title: "Case Status",
-    description:
-      "Find case information using case number, diary number, party name and other details.",
+    description: "Track cases and proceedings",
     icon: Search,
-    href: "#case-status",
-    number: "01",
   },
   {
     title: "Judgments",
-    description:
-      "Explore judgments and decisions published by the Supreme Court of India.",
+    description: "Search published judgments",
     icon: Gavel,
-    href: "#judgments",
-    number: "02",
-  },
-  {
-    title: "Daily Orders",
-    description:
-      "Access daily orders and information issued by the Court.",
-    icon: FileText,
-    href: "#daily-orders",
-    number: "03",
   },
   {
     title: "Cause List",
-    description:
-      "View court listings, sessions, judges and scheduled matters.",
+    description: "View daily court listings",
     icon: CalendarDays,
-    href: "#cause-list",
-    number: "04",
   },
   {
-    title: "Listing Notices",
-    description:
-      "Stay informed about listing changes, notices and court updates.",
-    icon: ClipboardList,
-    href: "#listing-notices",
-    number: "05",
-  },
-  {
-    title: "Office Reports",
-    description:
-      "Access reports and important registry-related information.",
+    title: "Orders",
+    description: "Access court orders",
     icon: FileText,
-    href: "#office-reports",
-    number: "06",
+  },
+  {
+    title: "Notices",
+    description: "Latest court notifications",
+    icon: BookOpen,
+  },
+  {
+    title: "Court Services",
+    description: "Explore digital services",
+    icon: Scale,
   },
 ];
 
 export default function QuickAccess() {
   return (
-    <section className="bg-[#F7F5EF] py-20 md:py-24">
-      <div className="sc-container">
-        {/* Section heading */}
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-2xl">
+    <section className="border-b border-slate-200 bg-white">
+      <div className="sc-container py-14">
+        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
             <p className="sc-eyebrow">
-              Quick Access
+              Quick access
             </p>
 
-            <h2 className="sc-heading">
-              Essential court services,
-              <span className="block">
-                one place.
-              </span>
+            <h2 className="sc-serif mt-2 text-3xl font-bold text-[#0B1F33]">
+              Find what you need
             </h2>
-
-            <p className="mt-5 max-w-xl text-base leading-7 text-slate-500">
-              Quickly access the information and services most
-              frequently used by litigants, advocates, researchers
-              and members of the public.
-            </p>
           </div>
 
-          <span className="hidden text-sm font-medium text-[#B38A3E] md:block">
-            Explore court services
-          </span>
+          <p className="max-w-md text-sm leading-6 text-slate-500">
+            Frequently used court information and digital
+            services, organized for faster discovery.
+          </p>
         </div>
 
-        {/* Service grid */}
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => {
             const Icon = service.icon;
 
             return (
-              <a
+              <button
                 key={service.title}
-                href={service.href}
-                className="
-                  group relative overflow-hidden
-                  rounded-2xl
-                  border border-slate-200
-                  bg-white
-                  p-6
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:border-[#B38A3E]/50
-                  hover:shadow-xl
-                  hover:shadow-[#0B1F33]/5
-                  focus:outline-none
-                  focus:ring-2
-                  focus:ring-[#B38A3E]
-                  focus:ring-offset-2
-                "
+                type="button"
+                className="group flex min-h-32 items-start justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left transition duration-200 hover:-translate-y-0.5 hover:border-[#B38A3E]/50 hover:shadow-lg"
               >
-                {/* Number */}
-                <div className="flex items-start justify-between">
-                  <span className="text-xs font-semibold tracking-[0.2em] text-slate-300">
-                    {service.number}
-                  </span>
-
-                  <div
-                    className="
-                      flex h-11 w-11 items-center justify-center
-                      rounded-xl
-                      bg-[#F7F5EF]
-                      text-[#0B1F33]
-                      transition-colors
-                      group-hover:bg-[#0B1F33]
-                      group-hover:text-[#D8B86A]
-                    "
-                  >
-                    <Icon size={20} strokeWidth={1.7} />
+                <div>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F7F5EF] text-[#B38A3E]">
+                    <Icon size={19} strokeWidth={1.8} />
                   </div>
+
+                  <h3 className="mt-5 text-base font-semibold text-[#0B1F33]">
+                    {service.title}
+                  </h3>
+
+                  <p className="mt-1 text-sm text-slate-500">
+                    {service.description}
+                  </p>
                 </div>
 
-                {/* Content */}
-                <h3 className="sc-serif mt-8 text-2xl font-bold text-[#0B1F33]">
-                  {service.title}
-                </h3>
-
-                <p className="mt-3 min-h-[72px] text-sm leading-6 text-slate-500">
-                  {service.description}
-                </p>
-
-                {/* Action */}
-                <div className="mt-7 flex items-center gap-2 text-sm font-semibold text-[#B38A3E]">
-                  Explore
-
-                  <ArrowUpRight
-                    size={16}
-                    className="
-                      transition-transform
-                      duration-300
-                      group-hover:translate-x-1
-                      group-hover:-translate-y-1
-                    "
-                  />
-                </div>
-
-                {/* Decorative line */}
-                <div
-                  className="
-                    absolute bottom-0 left-0
-                    h-1 w-0
-                    bg-[#B38A3E]
-                    transition-all duration-300
-                    group-hover:w-full
-                  "
+                <ArrowUpRight
+                  size={18}
+                  className="text-slate-300 transition group-hover:text-[#B38A3E]"
                 />
-              </a>
+              </button>
             );
           })}
         </div>
