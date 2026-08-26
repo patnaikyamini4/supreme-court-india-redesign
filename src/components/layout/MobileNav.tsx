@@ -4,14 +4,14 @@ import { Menu, Search, X } from "lucide-react";
 import { useState } from "react";
 
 const navigationItems = [
-  "Home",
-  "Court",
-  "Cases",
-  "Judgments",
-  "Orders",
-  "Notices",
-  "Cause List",
-  "Services",
+  { label: "Home", href: "/" },
+  { label: "Court", href: "/court" },
+  { label: "Cases", href: "/cases" },
+  { label: "Judgments", href: "/judgments" },
+  { label: "Orders", href: "/orders" },
+  { label: "Notices", href: "/notices" },
+  { label: "Cause List", href: "/cause-list" },
+  { label: "Services", href: "/services" },
 ];
 
 export default function MobileNav() {
@@ -45,23 +45,23 @@ export default function MobileNav() {
             className="border-t border-slate-100 py-3"
             aria-label="Mobile navigation"
           >
-            {navigationItems.map((item, index) => (
-              <a
-                key={item}
-                href="#"
-                onClick={() => setOpen(false)}
-                className={`
-                  block rounded-lg px-3 py-3 text-sm font-medium
-                  ${
-                    index === 0
-                      ? "bg-[#F7F5EF] text-[#B38A3E]"
-                      : "text-slate-600 hover:bg-slate-50 hover:text-[#0B1F33]"
-                  }
-                `}
-              >
-                {item}
-              </a>
-            ))}
+           {navigationItems.map((item, index) => (
+  <a
+    key={item.label}
+    href={item.href}
+    onClick={() => setOpen(false)}
+    className={`
+      block rounded-lg px-3 py-3 text-sm font-medium
+      ${
+        index === 0
+          ? "bg-[#F7F5EF] text-[#B38A3E]"
+          : "text-slate-600 hover:bg-slate-50 hover:text-[#0B1F33]"
+      }
+    `}
+  >
+    {item.label}
+  </a>
+))}
           </nav>
         )}
       </div>

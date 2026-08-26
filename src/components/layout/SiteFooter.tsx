@@ -9,28 +9,28 @@ const footerColumns = [
   {
     title: "Court",
     links: [
-      "About the Court",
-      "Judges",
-      "Former Judges",
-      "Registry",
+      { label: "About the Court", href: "/court" },
+      { label: "Judges", href: "/court" },
+      { label: "Registry", href: "/court" },
+      { label: "Contact", href: "/court" },
     ],
   },
   {
     title: "Services",
     links: [
-      "Case Status",
-      "Cause List",
-      "Judgments",
-      "Orders",
+      { label: "Case Status", href: "/cases" },
+      { label: "Cause List", href: "/cause-list" },
+      { label: "Judgments", href: "/judgments" },
+      { label: "Orders", href: "/orders" },
     ],
   },
   {
     title: "Resources",
     links: [
-      "Constitution",
-      "Supreme Court Rules",
-      "Legal Resources",
-      "Forms & Downloads",
+      { label: "Notices", href: "/notices" },
+      { label: "Rules", href: "/services" },
+      { label: "Resources", href: "/services" },
+      { label: "Downloads", href: "/services" },
     ],
   },
 ];
@@ -112,15 +112,15 @@ export default function SiteFooter() {
 
                 <ul className="mt-5 space-y-3">
                   {column.links.map((link) => (
-                    <li key={link}>
-                      <a
-                        href="#"
-                        className="text-sm text-white/45 transition hover:text-[#D8B86A]"
-                      >
-                        {link}
-                      </a>
-                    </li>
-                  ))}
+  <li key={link.label}>
+    <a
+      href={link.href}
+      className="text-sm text-white/45 transition hover:text-[#D8B86A]"
+    >
+      {link.label}
+    </a>
+  </li>
+))}
                 </ul>
               </div>
             ))}
