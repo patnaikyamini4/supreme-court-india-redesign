@@ -5,6 +5,7 @@ import LatestUpdates from "@/components/home/LatestUpdates";
 import CauseListPreview from "@/components/home/CauseListPreview";
 import LatestJudgments from "@/components/judgments/LatestJudgments";
 import CourtServices from "@/components/services/CourtServices";
+import ImportantResources from "@/components/resources/ImportantResources";
 
 export default function Home() {
   return (
@@ -29,6 +30,9 @@ export default function Home() {
 
         {/* Court digital services */}
         <CourtServices />
+
+        {/* Legal and institutional resources */}
+        <ImportantResources />
       </main>
     </>
   );
