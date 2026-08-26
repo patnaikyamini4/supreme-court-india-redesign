@@ -9,7 +9,7 @@ export default function PageContainer({
 }: PageContainerProps) {
   return (
     <div
-      className={`sc-container py-10 md:py-14 ${className}`}
+      className={`sc-container py-8 sm:py-10 md:py-14 ${className}`}
     >
       {children}
     </div>

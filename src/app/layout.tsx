@@ -9,8 +9,10 @@ export const metadata: Metadata = {
     default: "Supreme Court of India",
     template: "%s | Supreme Court of India",
   },
+
   description:
-    "A modern frontend redesign of the Supreme Court of India website for improved navigation, accessibility, discoverability and responsive experience.",
+    "A modern frontend redesign of the Supreme Court of India website with improved navigation, discoverability, accessibility and responsive design.",
+
   keywords: [
     "Supreme Court of India",
     "Supreme Court",
@@ -19,16 +21,25 @@ export const metadata: Metadata = {
     "Daily Orders",
     "Cause List",
     "Notices",
-    "e-Services",
+    "Court Services",
   ],
+
+  applicationName: "Supreme Court of India",
+
   authors: [
     {
       name: "Supreme Court of India Redesign",
     },
   ],
+
   robots: {
     index: true,
     follow: true,
+  },
+
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
   },
 };
 
@@ -40,9 +51,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <a
+          href="#main-content"
+          className="sc-skip-link"
+        >
+          Skip to main content
+        </a>
+
         <CourtHeader />
 
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
 
         <SiteFooter />
       </body>

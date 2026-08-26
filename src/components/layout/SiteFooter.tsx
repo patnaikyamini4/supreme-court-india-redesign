@@ -1,14 +1,11 @@
 import Link from "next/link";
+import {
+  ArrowUp,
+  ExternalLink,
+  MapPin,
+} from "lucide-react";
 
-const navigationLinks = [
-  {
-    label: "Home",
-    href: "/",
-  },
-  {
-    label: "Court",
-    href: "/court",
-  },
+const quickLinks = [
   {
     label: "Cases",
     href: "/cases",
@@ -25,122 +22,130 @@ const navigationLinks = [
     label: "Notices",
     href: "/notices",
   },
+];
+
+const serviceLinks = [
   {
     label: "Cause List",
     href: "/cause-list",
   },
   {
-    label: "e-Services",
+    label: "Court Services",
     href: "/services",
   },
   {
     label: "Search",
     href: "/search",
   },
-];
-
-const informationLinks = [
   {
-    label: "Case Status",
-    href: "/cases",
-  },
-  {
-    label: "Daily Orders",
-    href: "/orders",
-  },
-  {
-    label: "Latest Judgments",
-    href: "/judgments",
-  },
-  {
-    label: "Notices",
-    href: "/notices",
+    label: "The Court",
+    href: "/court",
   },
 ];
 
 export default function SiteFooter() {
   return (
     <footer className="bg-[#0B1F33] text-white">
-      <div className="sc-container py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="sc-container py-12 md:py-16">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr]">
           {/* Brand */}
           <div>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-4"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#D8B86A]">
-                <span className="sc-serif font-bold text-[#D8B86A]">
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#D8B86A] text-[#D8B86A]">
+                <span className="sc-serif text-lg font-bold">
                   SC
                 </span>
               </div>
 
               <div>
-                <p className="sc-serif text-xl font-bold">
-                  Supreme Court
+                <p className="sc-eyebrow text-[#D8B86A]">
+                  The Apex Court of India
                 </p>
 
-                <p className="text-xs text-white/50">
-                  of India
-                </p>
+                <h2 className="sc-serif mt-2 text-2xl font-bold">
+                  Supreme Court of India
+                </h2>
               </div>
-            </Link>
+            </div>
 
-            <p className="mt-6 max-w-md text-sm leading-7 text-white/50">
-              A frontend redesign focused on making
-              important judicial information easier to
-              discover, understand and access.
+            <p className="mt-6 max-w-md text-sm leading-7 text-white/60">
+              A redesigned frontend experience focused
+              on clearer information architecture,
+              discoverability, accessibility and
+              responsive design.
             </p>
+
+            <div className="mt-6 flex items-start gap-3 text-sm text-white/60">
+              <MapPin
+                size={17}
+                className="mt-0.5 shrink-0 text-[#D8B86A]"
+              />
+
+              <span>
+                Supreme Court of India
+                <br />
+                New Delhi, India
+              </span>
+            </div>
           </div>
 
-          {/* Navigation */}
+          {/* Quick links */}
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#D8B86A]">
-              Navigation
+            <p className="sc-eyebrow text-[#D8B86A]">
+              Quick Links
             </p>
 
-            <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3">
-              {navigationLinks.map((link) => (
+            <nav className="mt-5 space-y-3">
+              {quickLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-white/60 transition hover:text-[#D8B86A]"
+                  className="block text-sm text-white/65 transition hover:text-[#D8B86A]"
                 >
                   {link.label}
                 </Link>
               ))}
-            </div>
+            </nav>
           </div>
 
-          {/* Information */}
+          {/* Services */}
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#D8B86A]">
-              Information
+            <p className="sc-eyebrow text-[#D8B86A]">
+              Explore
             </p>
 
-            <div className="mt-5 space-y-3">
-              {informationLinks.map((link) => (
+            <nav className="mt-5 space-y-3">
+              {serviceLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="block text-sm text-white/60 transition hover:text-[#D8B86A]"
+                  className="flex items-center gap-2 text-sm text-white/65 transition hover:text-[#D8B86A]"
                 >
                   {link.label}
+
+                  {link.label === "Search" && (
+                    <ExternalLink size={13} />
+                  )}
                 </Link>
               ))}
-            </div>
+            </nav>
           </div>
         </div>
 
         <div className="mt-12 border-t border-white/10 pt-6">
-          <div className="flex flex-col justify-between gap-3 text-xs text-white/40 md:flex-row">
+          <div className="flex flex-col gap-5 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
             <p>
               © 2026 Supreme Court of India Redesign.
+              Frontend demonstration project.
             </p>
 
-            <p>
-              Frontend concept · No backend connected
-            </p>
+            <a
+              href="#main-content"
+              className="inline-flex items-center gap-2 self-start text-white/60 transition hover:text-[#D8B86A] sm:self-auto"
+            >
+              Back to top
+              <ArrowUp size={14} />
+            </a>
           </div>
         </div>
       </div>
