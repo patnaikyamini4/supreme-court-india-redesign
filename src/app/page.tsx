@@ -6,6 +6,7 @@ import CauseListPreview from "@/components/home/CauseListPreview";
 import LatestJudgments from "@/components/judgments/LatestJudgments";
 import CourtServices from "@/components/services/CourtServices";
 import ImportantResources from "@/components/resources/ImportantResources";
+import SiteFooter from "@/components/layout/SiteFooter";
 
 export default function Home() {
   return (
@@ -34,6 +35,9 @@ export default function Home() {
         {/* Legal and institutional resources */}
         <ImportantResources />
       </main>
+
+      {/* Global site footer */}
+      <SiteFooter />
     </>
   );
 }
