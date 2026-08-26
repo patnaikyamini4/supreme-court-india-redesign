@@ -4,6 +4,7 @@ import QuickAccess from "@/components/home/QuickAccess";
 import LatestUpdates from "@/components/home/LatestUpdates";
 import CauseListPreview from "@/components/home/CauseListPreview";
 import LatestJudgments from "@/components/judgments/LatestJudgments";
+import CourtServices from "@/components/services/CourtServices";
 
 export default function Home() {
   return (
@@ -17,14 +18,17 @@ export default function Home() {
         {/* Frequently used services */}
         <QuickAccess />
 
-        {/* Latest notices and announcements */}
+        {/* Notices and announcements */}
         <LatestUpdates />
 
-        {/* Today's court listings */}
+        {/* Daily court listings */}
         <CauseListPreview />
 
         {/* Recently published judgments */}
         <LatestJudgments />
+
+        {/* Court digital services */}
+        <CourtServices />
       </main>
     </>
   );
