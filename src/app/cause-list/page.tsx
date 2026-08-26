@@ -1,185 +1,173 @@
 "use client";
 
-import {
-  CalendarDays,
-  ChevronDown,
-  Clock,
-  Download,
-  Filter,
-} from "lucide-react";
+import { CalendarDays, ChevronDown, Clock } from "lucide-react";
 import { useState } from "react";
 
-const courts = [
+import PageHeader from "@/components/layout/PageHeader";
+import PageContainer from "@/components/layout/PageContainer";
+
+const causeList = [
   {
     court: "Court No. 1",
-    judges: "Chief Justice & Companion Judges",
-    matters: 24,
-  },
-  {
-    court: "Court No. 2",
-    judges: "Hon'ble Judges",
-    matters: 31,
-  },
-  {
-    court: "Court No. 3",
-    judges: "Hon'ble Judges",
-    matters: 27,
+    bench: "Chief Justice Bench",
+    time: "10:30 AM",
+    matters: 18,
   },
   {
     court: "Court No. 4",
-    judges: "Hon'ble Judges",
-    matters: 29,
+    bench: "Division Bench",
+    time: "10:30 AM",
+    matters: 24,
   },
   {
-    court: "Court No. 5",
-    judges: "Hon'ble Judges",
-    matters: 22,
+    court: "Court No. 7",
+    bench: "Division Bench",
+    time: "11:00 AM",
+    matters: 21,
   },
   {
-    court: "Court No. 6",
-    judges: "Hon'ble Judges",
-    matters: 26,
+    court: "Court No. 9",
+    bench: "Single Bench",
+    time: "11:30 AM",
+    matters: 16,
   },
-];
-
-const listingTypes = [
-  "All",
-  "Miscellaneous",
-  "Regular",
-  "Advance",
-  "Chamber",
 ];
 
 export default function CauseListPage() {
-  const [listing, setListing] = useState("All");
+  const [date, setDate] = useState("2026-08-26");
 
   return (
-    <main className="min-h-screen bg-[#F7F5EF]">
-      <section className="bg-[#0B1F33] text-white">
-        <div className="sc-container py-16 md:py-20">
-          <p className="sc-eyebrow text-[#D8B86A]">
-            Daily proceedings
-          </p>
+    <div className="min-h-screen bg-[#F7F5EF]">
+      <PageHeader
+        eyebrow="Court Schedule"
+        title="Cause List"
+        description="Browse upcoming court listings and scheduled matters in a clearer format."
+        breadcrumbs={[
+          {
+            label: "Cause List",
+          },
+        ]}
+      />
 
-          <h1 className="sc-serif mt-3 text-4xl font-bold md:text-6xl">
-            Cause List
-          </h1>
-
-          <p className="mt-5 max-w-2xl text-white/60">
-            Explore court-wise listings and scheduled matters
-            through a clearer daily view.
-          </p>
-        </div>
-      </section>
-
-      <section className="sc-container py-10">
-        <div className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 md:grid-cols-3">
-          <label>
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-              Date
-            </span>
-
-            <div className="mt-2 flex h-12 items-center gap-3 rounded-xl border border-slate-200 px-4">
-              <CalendarDays size={17} className="text-slate-400" />
-
-              <input
-                type="date"
-                defaultValue="2026-08-27"
-                className="w-full bg-transparent text-sm outline-none"
-              />
-            </div>
-          </label>
-
-          <label>
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-              Listing type
-            </span>
-
-            <div className="relative mt-2">
-              <select
-                value={listing}
-                onChange={(event) =>
-                  setListing(event.target.value)
-                }
-                className="h-12 w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 text-sm outline-none"
+      <PageContainer>
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+          <div className="grid gap-5 md:grid-cols-[1fr_1fr_auto] md:items-end">
+            <div>
+              <label
+                htmlFor="cause-date"
+                className="mb-2 block text-sm font-semibold text-[#0B1F33]"
               >
-                {listingTypes.map((item) => (
-                  <option key={item}>{item}</option>
-                ))}
-              </select>
+                Select date
+              </label>
 
-              <ChevronDown
-                size={16}
-                className="pointer-events-none absolute right-4 top-4 text-slate-400"
-              />
+              <div className="relative">
+                <CalendarDays
+                  size={17}
+                  className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#B38A3E]"
+                />
+
+                <input
+                  id="cause-date"
+                  type="date"
+                  value={date}
+                  onChange={(event) =>
+                    setDate(event.target.value)
+                  }
+                  className="h-12 w-full rounded-xl border border-slate-300 bg-white pl-11 pr-4 text-sm outline-none transition focus:border-[#B38A3E] focus:ring-4 focus:ring-[#B38A3E]/10"
+                />
+              </div>
             </div>
-          </label>
 
-          <div className="flex items-end">
+            <div>
+              <label
+                htmlFor="cause-type"
+                className="mb-2 block text-sm font-semibold text-[#0B1F33]"
+              >
+                Court type
+              </label>
+
+              <div className="relative">
+                <select
+                  id="cause-type"
+                  className="h-12 w-full appearance-none rounded-xl border border-slate-300 bg-white px-4 pr-10 text-sm outline-none focus:border-[#B38A3E]"
+                  defaultValue="all"
+                >
+                  <option value="all">
+                    All Courts
+                  </option>
+                  <option value="constitutional">
+                    Constitution Bench
+                  </option>
+                  <option value="division">
+                    Division Bench
+                  </option>
+                </select>
+
+                <ChevronDown
+                  size={16}
+                  className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"
+                />
+              </div>
+            </div>
+
             <button
               type="button"
-              className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#0B1F33] px-5 text-sm font-semibold text-white transition hover:bg-[#102A43]"
+              className="h-12 rounded-xl bg-[#0B1F33] px-7 text-sm font-semibold text-white"
             >
-              <Filter size={16} />
-              Apply filters
+              View List
             </button>
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col justify-between gap-4 md:flex-row md:items-center">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-[#B38A3E]">
-              Daily listing
+        <div className="mt-10">
+          <div className="mb-6">
+            <p className="sc-eyebrow text-[#B38A3E]">
+              Daily Schedule
             </p>
 
-            <h2 className="mt-1 text-2xl font-bold text-[#0B1F33]">
-              Court-wise schedule
+            <h2 className="sc-serif mt-2 text-3xl font-bold text-[#0B1F33]">
+              Court Listings
             </h2>
+
+            <p className="mt-2 text-sm text-slate-500">
+              Showing frontend demonstration data for{" "}
+              {date}.
+            </p>
           </div>
 
-          <button
-            type="button"
-            className="flex items-center gap-2 self-start rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-[#0B1F33] hover:border-[#B38A3E]"
-          >
-            <Download size={16} />
-            Download list
-          </button>
+          <div className="grid gap-4 md:grid-cols-2">
+            {causeList.map((item) => (
+              <article
+                key={item.court}
+                className="rounded-2xl border border-slate-200 bg-white p-6 transition hover:border-[#B38A3E]/50 hover:shadow-sm"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#B38A3E]">
+                      {item.court}
+                    </p>
+
+                    <h3 className="sc-serif mt-2 text-xl font-bold text-[#0B1F33]">
+                      {item.bench}
+                    </h3>
+                  </div>
+
+                  <span className="rounded-full bg-[#F7F5EF] px-3 py-2 text-xs font-semibold text-[#B38A3E]">
+                    {item.matters} matters
+                  </span>
+                </div>
+
+                <div className="mt-6 border-t border-slate-100 pt-5">
+                  <span className="flex items-center gap-2 text-sm text-slate-500">
+                    <Clock size={16} />
+                    {item.time}
+                  </span>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
-
-        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {courts.map((court) => (
-            <article
-              key={court.court}
-              className="rounded-2xl border border-slate-200 bg-white p-6 transition hover:border-[#B38A3E]/50 hover:shadow-md"
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="font-bold text-[#0B1F33]">
-                  {court.court}
-                </h3>
-
-                <span className="rounded-full bg-[#F7F5EF] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#B38A3E]">
-                  {listing}
-                </span>
-              </div>
-
-              <p className="mt-6 text-sm leading-6 text-slate-500">
-                {court.judges}
-              </p>
-
-              <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-5">
-                <span className="flex items-center gap-2 text-xs text-slate-400">
-                  <Clock size={14} />
-                  10:30 AM
-                </span>
-
-                <span className="text-xs font-semibold text-[#0B1F33]">
-                  {court.matters} matters
-                </span>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-    </main>
+      </PageContainer>
+    </div>
   );
 }

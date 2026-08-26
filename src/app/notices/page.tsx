@@ -1,132 +1,95 @@
-"use client";
-
+import Link from "next/link";
 import {
-  ArrowUpRight,
+  ArrowRight,
   Bell,
   CalendarDays,
-  Search,
 } from "lucide-react";
-import { useState } from "react";
+
+import PageHeader from "@/components/layout/PageHeader";
+import PageContainer from "@/components/layout/PageContainer";
 
 const notices = [
   {
-    category: "Listing Notice",
-    date: "23 August 2026",
-    title:
-      "Notice regarding change in Court No. 8",
+    title: "Notice regarding listing of matters",
+    date: "26 August 2026",
+    type: "Court Notice",
   },
   {
-    category: "Listing Notice",
+    title: "Important administrative directions",
     date: "24 August 2026",
-    title:
-      "Notice regarding change in Court Nos. 2, 8, 11 and 17",
+    type: "Administrative",
   },
   {
-    category: "Oral Mentioning",
-    date: "24 August 2026",
-    title:
-      "List of oral mentioning matters before Hon'ble Courts",
-  },
-  {
-    category: "Chamber Matters",
-    date: "24 August 2026",
-    title:
-      "Advance List of Chamber Matters likely to be listed",
-  },
-  {
-    category: "Administrative",
+    title: "Registry notice for advocates and parties",
     date: "22 August 2026",
-    title:
-      "Notice regarding sitting of Special Lok Adalat",
+    type: "Registry",
+  },
+  {
+    title: "Updated filing and procedural information",
+    date: "20 August 2026",
+    type: "Information",
   },
 ];
 
 export default function NoticesPage() {
-  const [query, setQuery] = useState("");
-
-  const filtered = notices.filter((notice) =>
-    notice.title.toLowerCase().includes(query.toLowerCase())
-  );
-
   return (
-    <main className="min-h-screen bg-[#F7F5EF]">
-      <section className="bg-[#0B1F33] text-white">
-        <div className="sc-container py-16 md:py-20">
-          <p className="sc-eyebrow text-[#D8B86A]">
-            Information centre
-          </p>
+    <div className="min-h-screen bg-[#F7F5EF]">
+      <PageHeader
+        eyebrow="Court Information"
+        title="Notices"
+        description="View important notices, announcements and updates from the Supreme Court."
+        breadcrumbs={[
+          {
+            label: "Notices",
+          },
+        ]}
+      />
 
-          <h1 className="sc-serif mt-3 text-4xl font-bold md:text-6xl">
-            Notices
-          </h1>
-
-          <p className="mt-5 max-w-2xl text-white/60">
-            Browse notices, listing information and
-            administrative announcements.
-          </p>
-        </div>
-      </section>
-
-      <section className="sc-container py-10">
-        <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4">
-          <Search size={18} className="text-slate-400" />
-
-          <input
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search notices..."
-            className="h-14 w-full outline-none"
-          />
-        </div>
-
-        <div className="mt-7 space-y-3">
-          {filtered.map((notice) => (
+      <PageContainer>
+        <div className="grid gap-4">
+          {notices.map((notice, index) => (
             <article
               key={notice.title}
-              className="group rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-[#B38A3E]/50 hover:shadow-md md:p-6"
+              className="rounded-2xl border border-slate-200 bg-white p-6 transition hover:border-[#B38A3E]/50 hover:shadow-sm"
             >
               <div className="flex flex-col gap-5 md:flex-row md:items-center">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#F7F5EF] text-[#B38A3E]">
-                  <Bell size={18} />
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#F7F5EF] text-[#B38A3E]">
+                  <Bell size={21} />
                 </div>
 
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-3">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#B38A3E]">
-                      {notice.category}
+                    <span className="rounded-full bg-[#F7F5EF] px-3 py-1 text-xs font-semibold text-[#B38A3E]">
+                      {notice.type}
                     </span>
 
-                    <span className="flex items-center gap-1 text-xs text-slate-400">
-                      <CalendarDays size={13} />
-                      {notice.date}
+                    <span className="text-xs text-slate-400">
+                      Notice {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
 
-                  <h2 className="mt-2 text-sm font-bold leading-6 text-[#0B1F33] md:text-base">
+                  <h2 className="sc-serif mt-3 text-xl font-bold text-[#0B1F33]">
                     {notice.title}
                   </h2>
+
+                  <p className="mt-2 flex items-center gap-2 text-sm text-slate-500">
+                    <CalendarDays size={14} />
+                    {notice.date}
+                  </p>
                 </div>
 
-                <button
-                  type="button"
-                  className="flex items-center gap-2 self-start text-sm font-semibold text-[#0B1F33] hover:text-[#B38A3E]"
+                <Link
+                  href="/search"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#B38A3E]"
                 >
-                  View
-                  <ArrowUpRight size={16} />
-                </button>
+                  Read notice
+                  <ArrowRight size={16} />
+                </Link>
               </div>
             </article>
           ))}
-
-          {filtered.length === 0 && (
-            <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-12 text-center">
-              <p className="font-semibold text-[#0B1F33]">
-                No notices found
-              </p>
-            </div>
-          )}
         </div>
-      </section>
-    </main>
+      </PageContainer>
+    </div>
   );
 }

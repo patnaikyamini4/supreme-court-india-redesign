@@ -1,63 +1,52 @@
 "use client";
 
 import {
-  ArrowUpRight,
   FileText,
-  Gavel,
-  Search,
-  Bell,
-  BriefcaseBusiness,
+  Search as SearchIcon,
+  X,
 } from "lucide-react";
 import { useMemo, useState } from "react";
+import Link from "next/link";
 
-const searchableContent = [
+import PageHeader from "@/components/layout/PageHeader";
+import PageContainer from "@/components/layout/PageContainer";
+
+const searchableItems = [
   {
-    title: "Latest Judgments",
-    description:
-      "Search published judgments and judicial decisions.",
-    type: "Judgments",
-    href: "/judgments",
-    icon: Gavel,
+    title: "Constitutional Interpretation and Fundamental Rights",
+    type: "Judgment",
+    date: "18 August 2026",
+    href: "/judgments/sample-constitutional-matter",
   },
   {
-    title: "Case Status",
-    description:
-      "Search cases using case number, diary number, party name or CNR number.",
-    type: "Cases",
-    href: "/cases",
-    icon: BriefcaseBusiness,
+    title: "Principles Governing Civil Appellate Jurisdiction",
+    type: "Judgment",
+    date: "12 August 2026",
+    href: "/judgments/sample-civil-matter",
   },
   {
-    title: "Daily Orders",
-    description:
-      "Browse orders published by the Supreme Court.",
-    type: "Orders",
-    href: "/orders",
-    icon: FileText,
-  },
-  {
-    title: "Notices",
-    description:
-      "Find listing notices, circulars and announcements.",
-    type: "Notices",
+    title: "Notice regarding listing of matters",
+    type: "Notice",
+    date: "26 August 2026",
     href: "/notices",
-    icon: Bell,
   },
   {
-    title: "Cause List",
-    description:
-      "Explore court-wise daily listings.",
+    title: "Daily court orders and procedural directions",
+    type: "Order",
+    date: "25 August 2026",
+    href: "/orders",
+  },
+  {
+    title: "Court listings and scheduled matters",
     type: "Cause List",
+    date: "26 August 2026",
     href: "/cause-list",
-    icon: FileText,
   },
   {
-    title: "e-Services",
-    description:
-      "Access online services and digital resources.",
-    type: "Services",
-    href: "/services",
-    icon: Search,
+    title: "Supreme Court of India",
+    type: "Court",
+    date: "2026",
+    href: "/court",
   },
 ];
 
@@ -68,127 +57,160 @@ export default function SearchPage() {
     const normalized = query.trim().toLowerCase();
 
     if (!normalized) {
-      return searchableContent;
+      return searchableItems;
     }
 
-    return searchableContent.filter((item) =>
-      `${item.title} ${item.description} ${item.type}`
+    return searchableItems.filter((item) =>
+      `${item.title} ${item.type} ${item.date}`
         .toLowerCase()
         .includes(normalized)
     );
   }, [query]);
 
   return (
-    <main className="min-h-screen bg-[#F7F5EF]">
-      <section className="bg-[#0B1F33] text-white">
-        <div className="sc-container py-16 md:py-20">
-          <p className="sc-eyebrow text-[#D8B86A]">
-            Find information
-          </p>
+    <div className="min-h-screen bg-[#F7F5EF]">
+      <PageHeader
+        eyebrow="Discover"
+        title="Search the Court"
+        description="Search judgments, cases, orders, notices and other important court information."
+        breadcrumbs={[
+          {
+            label: "Search",
+          },
+        ]}
+      />
 
-          <h1 className="sc-serif mt-3 text-4xl font-bold md:text-6xl">
-            Search
-          </h1>
+      <PageContainer>
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+          <label
+            htmlFor="site-search"
+            className="mb-3 block text-sm font-semibold text-[#0B1F33]"
+          >
+            Search website
+          </label>
 
-          <p className="mt-5 max-w-2xl text-sm leading-7 text-white/60 md:text-base">
-            Search across court services, judgments, orders,
-            notices and other sections of the website.
-          </p>
-
-          <div className="mt-8 flex max-w-3xl items-center gap-3 rounded-2xl bg-white p-2">
-            <Search
-              size={21}
-              className="ml-3 text-slate-400"
+          <div className="relative">
+            <SearchIcon
+              size={19}
+              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#B38A3E]"
             />
 
             <input
+              id="site-search"
+              type="search"
               value={query}
               onChange={(event) =>
                 setQuery(event.target.value)
               }
-              placeholder="Search judgments, cases, notices, services..."
-              className="h-12 flex-1 bg-transparent px-2 text-sm text-[#0B1F33] outline-none"
+              placeholder="Search judgments, cases, notices..."
+              className="h-14 w-full rounded-xl border border-slate-300 bg-white pl-12 pr-12 text-sm text-[#0B1F33] outline-none transition focus:border-[#B38A3E] focus:ring-4 focus:ring-[#B38A3E]/10"
             />
 
-            <button
-              type="button"
-              className="rounded-xl bg-[#B38A3E] px-5 py-3 text-sm font-semibold text-white"
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section className="sc-container py-10">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-xs text-slate-400">
-              {query
-                ? `${results.length} results`
-                : "Popular sections"}
-            </p>
-
-            <h2 className="mt-1 text-2xl font-bold text-[#0B1F33]">
-              {query ? "Search results" : "Explore"}
-            </h2>
-          </div>
-        </div>
-
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {results.map((item) => {
-            const Icon = item.icon;
-
-            return (
-              <a
-                key={item.title}
-                href={item.href}
-                className="group rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-[#B38A3E]/50 hover:shadow-md"
+            {query && (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                aria-label="Clear search"
+                className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 hover:text-[#0B1F33]"
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#F7F5EF] text-[#B38A3E]">
-                    <Icon size={19} />
+                <X size={17} />
+              </button>
+            )}
+          </div>
+
+          <div className="mt-4 flex flex-wrap gap-2">
+            {[
+              "Judgments",
+              "Cases",
+              "Orders",
+              "Notices",
+            ].map((category) => (
+              <button
+                key={category}
+                type="button"
+                onClick={() => setQuery(category)}
+                className="rounded-full border border-slate-200 px-4 py-2 text-xs font-medium text-slate-600 transition hover:border-[#B38A3E] hover:text-[#B38A3E]"
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <section className="mt-10">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <p className="sc-eyebrow text-[#B38A3E]">
+                Results
+              </p>
+
+              <h2 className="sc-serif mt-2 text-3xl font-bold text-[#0B1F33]">
+                {query
+                  ? `Results for "${query}"`
+                  : "Available Information"}
+              </h2>
+            </div>
+
+            <span className="text-sm text-slate-500">
+              {results.length} results
+            </span>
+          </div>
+
+          <div className="mt-6 grid gap-4">
+            {results.length > 0 ? (
+              results.map((item) => (
+                <Link
+                  key={`${item.type}-${item.title}`}
+                  href={item.href}
+                  className="group rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-[#B38A3E]/50 hover:shadow-sm md:p-6"
+                >
+                  <div className="flex gap-4">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#F7F5EF] text-[#B38A3E]">
+                      <FileText size={20} />
+                    </div>
+
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap gap-2">
+                        <span className="text-xs font-bold uppercase tracking-wider text-[#B38A3E]">
+                          {item.type}
+                        </span>
+
+                        <span className="text-xs text-slate-400">
+                          {item.date}
+                        </span>
+                      </div>
+
+                      <h3 className="sc-serif mt-2 text-xl font-bold text-[#0B1F33]">
+                        {item.title}
+                      </h3>
+
+                      <p className="mt-2 text-sm text-[#B38A3E]">
+                        Open result →
+                      </p>
+                    </div>
                   </div>
+                </Link>
+              ))
+            ) : (
+              <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center">
+                <SearchIcon
+                  className="mx-auto text-slate-300"
+                  size={35}
+                />
 
-                  <ArrowUpRight
-                    size={17}
-                    className="text-slate-300 group-hover:text-[#B38A3E]"
-                  />
-                </div>
-
-                <p className="mt-6 text-[10px] font-bold uppercase tracking-[0.16em] text-[#B38A3E]">
-                  {item.type}
-                </p>
-
-                <h3 className="mt-2 text-lg font-bold text-[#0B1F33]">
-                  {item.title}
+                <h3 className="sc-serif mt-5 text-2xl font-bold text-[#0B1F33]">
+                  No results found
                 </h3>
 
-                <p className="mt-2 text-sm leading-6 text-slate-500">
-                  {item.description}
+                <p className="mt-2 text-sm text-slate-500">
+                  Try another keyword or browse one of the
+                  available categories.
                 </p>
-              </a>
-            );
-          })}
-        </div>
-
-        {results.length === 0 && (
-          <div className="mt-6 rounded-2xl border border-dashed border-slate-300 bg-white p-12 text-center">
-            <Search
-              size={28}
-              className="mx-auto text-slate-300"
-            />
-
-            <h2 className="mt-4 font-bold text-[#0B1F33]">
-              No results found
-            </h2>
-
-            <p className="mt-2 text-sm text-slate-500">
-              Try a different search phrase.
-            </p>
+              </div>
+            )}
           </div>
-        )}
-      </section>
-    </main>
+        </section>
+      </PageContainer>
+    </div>
   );
 }

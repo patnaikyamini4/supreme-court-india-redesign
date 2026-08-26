@@ -6,7 +6,10 @@ import {
   FileText,
 } from "lucide-react";
 
-interface JudgmentPageProps {
+import PageHeader from "@/components/layout/PageHeader";
+import PageContainer from "@/components/layout/PageContainer";
+
+interface JudgmentDetailPageProps {
   params: Promise<{
     id: string;
   }>;
@@ -14,125 +17,166 @@ interface JudgmentPageProps {
 
 export default async function JudgmentDetailPage({
   params,
-}: JudgmentPageProps) {
+}: JudgmentDetailPageProps) {
   const { id } = await params;
 
+  const formattedId = id
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (letter) =>
+      letter.toUpperCase()
+    );
+
   return (
-    <main className="min-h-screen bg-[#F7F5EF]">
-      <section className="bg-[#0B1F33] text-white">
-        <div className="sc-container py-14">
-          <Link
-            href="/judgments"
-            className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-[#D8B86A]"
-          >
-            <ArrowLeft size={16} />
-            Back to judgments
-          </Link>
+    <div className="min-h-screen bg-[#F7F5EF]">
+      <PageHeader
+        eyebrow="Judgment"
+        title="Judgment Details"
+        description="View the complete details and available documents associated with this judgment."
+        breadcrumbs={[
+          {
+            label: "Judgments",
+            href: "/judgments",
+          },
+          {
+            label: "Judgment Details",
+          },
+        ]}
+      />
 
-          <p className="mt-10 text-[10px] font-bold uppercase tracking-widest text-[#D8B86A]">
-            Judgment
-          </p>
+      <PageContainer>
+        <Link
+          href="/judgments"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#B38A3E] transition hover:text-[#0B1F33]"
+        >
+          <ArrowLeft size={16} />
+          Back to judgments
+        </Link>
 
-          <h1 className="sc-serif mt-3 max-w-4xl text-3xl font-bold leading-tight md:text-5xl">
-            Judgment Record
-          </h1>
+        <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
+          <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-9">
+            <div className="border-b border-slate-200 pb-7">
+              <p className="text-xs font-bold uppercase tracking-wider text-[#B38A3E]">
+                2026 INSC 245
+              </p>
 
-          <p className="mt-4 text-sm text-white/50">
-            Record ID: {id}
-          </p>
-        </div>
-      </section>
+              <h2 className="sc-serif mt-3 text-3xl font-bold leading-tight text-[#0B1F33] md:text-4xl">
+                {formattedId}
+              </h2>
 
-      <section className="sc-container py-10">
-        <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
-          <article className="rounded-2xl border border-slate-200 bg-white p-7 md:p-10">
-            <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#F7F5EF] text-[#B38A3E]">
-                <FileText size={20} />
-              </div>
+              <div className="mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-500">
+                <span className="inline-flex items-center gap-2">
+                  <CalendarDays size={15} />
+                  18 August 2026
+                </span>
 
-              <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-[#B38A3E]">
-                  Supreme Court of India
-                </p>
-
-                <h2 className="mt-2 text-xl font-bold text-[#0B1F33] md:text-2xl">
-                  Judgment information
-                </h2>
+                <span className="inline-flex items-center gap-2">
+                  <FileText size={15} />
+                  Constitution Bench
+                </span>
               </div>
             </div>
 
-            <div className="mt-8 border-t border-slate-100 pt-8">
-              <p className="text-sm leading-8 text-slate-600">
-                This frontend page is designed as the
-                presentation layer for a Supreme Court judgment.
-                The final implementation can connect this
-                interface to the official judgment record without
-                changing the visual structure.
+            <div className="prose prose-slate mt-8 max-w-none">
+              <h3 className="sc-serif text-2xl font-bold text-[#0B1F33]">
+                Summary
+              </h3>
+
+              <p className="mt-4 text-sm leading-7 text-slate-600">
+                This frontend demonstration presents
+                how judgment information can be organized
+                for easier reading and discovery.
               </p>
 
-              <div className="mt-8 rounded-xl bg-[#F7F5EF] p-5">
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                  Judgment content
-                </p>
+              <h3 className="sc-serif mt-9 text-2xl font-bold text-[#0B1F33]">
+                Matter
+              </h3>
 
-                <p className="mt-3 text-sm leading-7 text-slate-600">
-                  Official judgment text, case metadata and
-                  downloadable documents can be displayed in
-                  this area when the frontend is connected to
-                  the required data source.
-                </p>
-              </div>
+              <p className="mt-4 text-sm leading-7 text-slate-600">
+                The matter concerns constitutional
+                interpretation, legal principles and the
+                rights and obligations of the parties
+                before the Court.
+              </p>
+
+              <h3 className="sc-serif mt-9 text-2xl font-bold text-[#0B1F33]">
+                Decision
+              </h3>
+
+              <p className="mt-4 text-sm leading-7 text-slate-600">
+                The Court considered the submissions and
+                applicable legal principles before
+                delivering its decision.
+              </p>
             </div>
           </article>
 
-          <aside className="space-y-4">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <h3 className="font-bold text-[#0B1F33]">
-                Case information
-              </h3>
+          <aside className="h-fit rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <p className="sc-eyebrow text-[#B38A3E]">
+              Documents
+            </p>
 
-              <dl className="mt-5 space-y-4 text-sm">
-                <div>
-                  <dt className="text-xs text-slate-400">
-                    Case number
-                  </dt>
-                  <dd className="mt-1 font-medium">
-                    C.A. No. ——
-                  </dd>
-                </div>
+            <h3 className="sc-serif mt-2 text-xl font-bold text-[#0B1F33]">
+              Available Files
+            </h3>
 
-                <div>
-                  <dt className="text-xs text-slate-400">
-                    Diary number
-                  </dt>
-                  <dd className="mt-1 font-medium">
-                    ——
-                  </dd>
-                </div>
+            <div className="mt-6 space-y-3">
+              <button
+                type="button"
+                className="flex w-full items-center justify-between rounded-xl border border-slate-200 p-4 text-left transition hover:border-[#B38A3E]"
+              >
+                <span className="flex items-center gap-3">
+                  <FileText
+                    size={18}
+                    className="text-[#B38A3E]"
+                  />
 
-                <div>
-                  <dt className="text-xs text-slate-400">
-                    Judgment date
-                  </dt>
-                  <dd className="mt-1 flex items-center gap-2 font-medium">
-                    <CalendarDays size={14} />
-                    ——
-                  </dd>
-                </div>
-              </dl>
+                  <span>
+                    <span className="block text-sm font-semibold text-[#0B1F33]">
+                      Judgment
+                    </span>
+
+                    <span className="text-xs text-slate-500">
+                      PDF document
+                    </span>
+                  </span>
+                </span>
+
+                <Download size={16} />
+              </button>
+
+              <button
+                type="button"
+                className="flex w-full items-center justify-between rounded-xl border border-slate-200 p-4 text-left transition hover:border-[#B38A3E]"
+              >
+                <span className="flex items-center gap-3">
+                  <FileText
+                    size={18}
+                    className="text-[#B38A3E]"
+                  />
+
+                  <span>
+                    <span className="block text-sm font-semibold text-[#0B1F33]">
+                      Cause List
+                    </span>
+
+                    <span className="text-xs text-slate-500">
+                      Related document
+                    </span>
+                  </span>
+                </span>
+
+                <Download size={16} />
+              </button>
             </div>
 
-            <button
-              type="button"
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#0B1F33] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#102A43]"
-            >
-              <Download size={16} />
-              Download judgment
-            </button>
+            <p className="mt-6 text-xs leading-5 text-slate-400">
+              Documents shown here are frontend
+              demonstration elements. No backend or
+              document service is connected.
+            </p>
           </aside>
         </div>
-      </section>
-    </main>
+      </PageContainer>
+    </div>
   );
 }

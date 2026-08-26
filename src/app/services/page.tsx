@@ -1,191 +1,128 @@
+import Link from "next/link";
 import {
-  ArrowUpRight,
-  BadgeCheck,
-  BookOpen,
-  FileCheck2,
+  ArrowRight,
+  CalendarDays,
+  FileSearch,
   FileText,
-  Globe2,
-  Monitor,
-  Scale,
+  Gavel,
   Search,
-  ShieldCheck,
+  Scale,
 } from "lucide-react";
+
+import PageHeader from "@/components/layout/PageHeader";
+import PageContainer from "@/components/layout/PageContainer";
 
 const services = [
   {
-    title: "e-Filing",
+    title: "Case Status",
     description:
-      "Digital filing services for cases and court documents.",
-    category: "Digital Filing",
-    icon: FileText,
+      "Search and explore information about cases before the Court.",
+    icon: FileSearch,
+    href: "/cases",
   },
   {
-    title: "Online Appearance Slips",
+    title: "Judgments",
     description:
-      "Access online facilities relating to appearance slips.",
-    category: "Court Access",
-    icon: BadgeCheck,
-  },
-  {
-    title: "SuSwagatam",
-    description:
-      "Digital e-Pass and visitor access service.",
-    category: "Visitor Services",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Grievance Status",
-    description:
-      "Access information regarding submitted grievances.",
-    category: "Citizen Services",
-    icon: Search,
-  },
-  {
-    title: "Online RTI Portal",
-    description:
-      "Access the online Right to Information service.",
-    category: "Transparency",
-    icon: Globe2,
-  },
-  {
-    title: "Certified Copy",
-    description:
-      "Information and access related to certified copies.",
-    category: "Registry",
-    icon: FileCheck2,
-  },
-  {
-    title: "National Judicial Data Grid",
-    description:
-      "Access judicial data and statistical information.",
-    category: "Judicial Data",
-    icon: Monitor,
-  },
-  {
-    title: "Supreme Court Reports",
-    description:
-      "Explore the Supreme Court Reports resource.",
-    category: "Legal Research",
-    icon: BookOpen,
-  },
-  {
-    title: "Neutral Citation",
-    description:
-      "Access neutral citation resources for judgments.",
-    category: "Legal Research",
+      "Browse judicial decisions and judgment information.",
     icon: Scale,
+    href: "/judgments",
   },
   {
-    title: "Verdict Finder",
+    title: "Daily Orders",
     description:
-      "Search and discover judicial decisions.",
-    category: "Legal Research",
-    icon: Search,
+      "Access daily court orders and procedural records.",
+    icon: FileText,
+    href: "/orders",
   },
-];
-
-const categories = [
-  "All",
-  "Digital Filing",
-  "Court Access",
-  "Citizen Services",
-  "Legal Research",
-  "Registry",
+  {
+    title: "Cause List",
+    description:
+      "View court listings and scheduled matters.",
+    icon: CalendarDays,
+    href: "/cause-list",
+  },
+  {
+    title: "Court Information",
+    description:
+      "Explore information about the Court and its structure.",
+    icon: Gavel,
+    href: "/court",
+  },
+  {
+    title: "Search",
+    description:
+      "Search important information across the redesigned website.",
+    icon: Search,
+    href: "/search",
+  },
 ];
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen bg-[#F7F5EF]">
-      <section className="bg-[#0B1F33] text-white">
-        <div className="sc-container py-16 md:py-20">
-          <p className="sc-eyebrow text-[#D8B86A]">
-            Digital access
-          </p>
+    <div className="min-h-screen bg-[#F7F5EF]">
+      <PageHeader
+        eyebrow="Digital Access"
+        title="Court Services"
+        description="Access digital court services and important online resources from one organized directory."
+        breadcrumbs={[
+          {
+            label: "Services",
+          },
+        ]}
+      />
 
-          <h1 className="sc-serif mt-3 text-4xl font-bold md:text-6xl">
-            e-Services
-          </h1>
-
-          <p className="mt-5 max-w-2xl text-sm leading-7 text-white/60 md:text-base">
-            A single access point for digital services,
-            research tools and online facilities.
-          </p>
-        </div>
-      </section>
-
-      <section className="sc-container py-10">
-        <div className="flex flex-wrap gap-2">
-          {categories.map((category, index) => (
-            <button
-              key={category}
-              type="button"
-              className={`rounded-full px-4 py-2 text-xs font-semibold transition ${
-                index === 0
-                  ? "bg-[#0B1F33] text-white"
-                  : "border border-slate-200 bg-white text-slate-500 hover:border-[#B38A3E]"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <PageContainer>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => {
             const Icon = service.icon;
 
             return (
-              <article
+              <Link
                 key={service.title}
+                href={service.href}
                 className="group rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-[#B38A3E]/50 hover:shadow-md"
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#F7F5EF] text-[#B38A3E]">
-                    <Icon size={19} />
-                  </div>
-
-                  <ArrowUpRight
-                    size={17}
-                    className="text-slate-300 transition group-hover:text-[#B38A3E]"
-                  />
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#F7F5EF] text-[#B38A3E]">
+                  <Icon size={22} />
                 </div>
 
-                <p className="mt-7 text-[10px] font-bold uppercase tracking-[0.16em] text-[#B38A3E]">
-                  {service.category}
-                </p>
-
-                <h2 className="mt-2 text-lg font-bold text-[#0B1F33]">
+                <h2 className="sc-serif mt-6 text-xl font-bold text-[#0B1F33]">
                   {service.title}
                 </h2>
 
-                <p className="mt-3 text-sm leading-6 text-slate-500">
+                <p className="mt-3 text-sm leading-6 text-slate-600">
                   {service.description}
                 </p>
 
-                <button
-                  type="button"
-                  className="mt-6 text-sm font-semibold text-[#0B1F33] hover:text-[#B38A3E]"
-                >
-                  Open service →
-                </button>
-              </article>
+                <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#B38A3E]">
+                  Open service
+                  <ArrowRight
+                    size={16}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
+                </span>
+              </Link>
             );
           })}
         </div>
 
-        <div className="mt-10 rounded-2xl border border-[#B38A3E]/20 bg-white p-6 md:p-8">
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#B38A3E]">
-            Frontend notice
+        <div className="mt-10 rounded-2xl border border-[#B38A3E]/30 bg-white p-6 md:p-8">
+          <p className="sc-eyebrow text-[#B38A3E]">
+            Frontend Demonstration
           </p>
 
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-500">
-            These interfaces are part of the frontend redesign.
-            They do not submit forms or retrieve live information.
-            Official services can be connected later without
-            changing the visual architecture.
+          <h2 className="sc-serif mt-3 text-2xl font-bold text-[#0B1F33]">
+            No backend connection
+          </h2>
+
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600">
+            These service cards demonstrate the redesigned
+            navigation and information architecture. They
+            do not connect to the Supreme Court's live
+            systems or retrieve real-time data.
           </p>
         </div>
-      </section>
-    </main>
+      </PageContainer>
+    </div>
   );
 }
