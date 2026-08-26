@@ -5,7 +5,7 @@ import MobileNav from "./MobileNav";
 
 export default function CourtHeader() {
   return (
-    <header className="w-full">
+    <header>
       <GovernmentBar />
       <SiteHeader />
       <DesktopNav />

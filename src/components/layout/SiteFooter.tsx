@@ -1,201 +1,146 @@
-import {
-  ArrowUpRight,
-  Mail,
-  MapPin,
-  Phone,
-} from "lucide-react";
+import Link from "next/link";
 
-const footerColumns = [
+const navigationLinks = [
   {
-    title: "Court",
-    links: [
-      { label: "About the Court", href: "/court" },
-      { label: "Judges", href: "/court" },
-      { label: "Registry", href: "/court" },
-      { label: "Contact", href: "/court" },
-    ],
+    label: "Home",
+    href: "/",
   },
   {
-    title: "Services",
-    links: [
-      { label: "Case Status", href: "/cases" },
-      { label: "Cause List", href: "/cause-list" },
-      { label: "Judgments", href: "/judgments" },
-      { label: "Orders", href: "/orders" },
-    ],
+    label: "Court",
+    href: "/court",
   },
   {
-    title: "Resources",
-    links: [
-      { label: "Notices", href: "/notices" },
-      { label: "Rules", href: "/services" },
-      { label: "Resources", href: "/services" },
-      { label: "Downloads", href: "/services" },
-    ],
+    label: "Cases",
+    href: "/cases",
+  },
+  {
+    label: "Judgments",
+    href: "/judgments",
+  },
+  {
+    label: "Orders",
+    href: "/orders",
+  },
+  {
+    label: "Notices",
+    href: "/notices",
+  },
+  {
+    label: "Cause List",
+    href: "/cause-list",
+  },
+  {
+    label: "e-Services",
+    href: "/services",
+  },
+  {
+    label: "Search",
+    href: "/search",
+  },
+];
+
+const informationLinks = [
+  {
+    label: "Case Status",
+    href: "/cases",
+  },
+  {
+    label: "Daily Orders",
+    href: "/orders",
+  },
+  {
+    label: "Latest Judgments",
+    href: "/judgments",
+  },
+  {
+    label: "Notices",
+    href: "/notices",
   },
 ];
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-[#071624] text-white">
-      {/* Main footer */}
-      <div className="sc-container py-16 md:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.5fr_2fr]">
-          {/* Court identity */}
-          <div className="max-w-md">
-            <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#B38A3E] bg-white">
-                <span className="sc-serif text-lg font-bold text-[#0B1F33]">
+    <footer className="bg-[#0B1F33] text-white">
+      <div className="sc-container py-14">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
+          {/* Brand */}
+          <div>
+            <Link
+              href="/"
+              className="inline-flex items-center gap-4"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#D8B86A]">
+                <span className="sc-serif font-bold text-[#D8B86A]">
                   SC
                 </span>
               </div>
 
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D8B86A]">
-                  The Apex Court of India
+                <p className="sc-serif text-xl font-bold">
+                  Supreme Court
                 </p>
 
-                <h2 className="sc-serif mt-1 text-xl font-bold">
-                  Supreme Court of India
-                </h2>
+                <p className="text-xs text-white/50">
+                  of India
+                </p>
               </div>
-            </div>
+            </Link>
 
-            <p className="mt-7 text-sm leading-7 text-white/50">
-              An independent frontend redesign concept focused
-              on making judicial information, court services and
-              legal resources easier to discover and access.
+            <p className="mt-6 max-w-md text-sm leading-7 text-white/50">
+              A frontend redesign focused on making
+              important judicial information easier to
+              discover, understand and access.
             </p>
-
-            {/* Contact information */}
-            <div className="mt-7 space-y-3 text-sm text-white/50">
-              <div className="flex items-start gap-3">
-                <MapPin
-                  size={16}
-                  className="mt-0.5 shrink-0 text-[#D8B86A]"
-                />
-
-                <span>
-                  Supreme Court of India,
-                  <br />
-                  New Delhi, India
-                </span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <Phone
-                  size={15}
-                  className="shrink-0 text-[#D8B86A]"
-                />
-
-                <span>Registry & Court Services</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <Mail
-                  size={15}
-                  className="shrink-0 text-[#D8B86A]"
-                />
-
-                <span>Official Court Communication</span>
-              </div>
-            </div>
           </div>
 
-          {/* Navigation columns */}
-          <div className="grid gap-10 sm:grid-cols-3">
-            {footerColumns.map((column) => (
-              <div key={column.title}>
-                <h3 className="text-sm font-bold text-white">
-                  {column.title}
-                </h3>
-
-                <ul className="mt-5 space-y-3">
-                  {column.links.map((link) => (
-  <li key={link.label}>
-    <a
-      href={link.href}
-      className="text-sm text-white/45 transition hover:text-[#D8B86A]"
-    >
-      {link.label}
-    </a>
-  </li>
-))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Contact / quick links */}
-        <div className="mt-14 grid gap-4 border-t border-white/10 pt-8 md:grid-cols-2">
+          {/* Navigation */}
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#D8B86A]">
-              Need assistance?
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#D8B86A]">
+              Navigation
             </p>
 
-            <p className="mt-2 text-sm text-white/50">
-              Explore court services and information through
-              the digital access points above.
-            </p>
+            <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3">
+              {navigationLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm text-white/60 transition hover:text-[#D8B86A]"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
 
-          <div className="flex flex-wrap gap-3 md:justify-end">
-            <a
-              href="#"
-              className="flex items-center gap-2 rounded-lg border border-white/10 px-4 py-2.5 text-sm text-white/60 transition hover:border-[#D8B86A]/50 hover:text-[#D8B86A]"
-            >
-              Accessibility
-              <ArrowUpRight size={14} />
-            </a>
+          {/* Information */}
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#D8B86A]">
+              Information
+            </p>
 
-            <a
-              href="#"
-              className="flex items-center gap-2 rounded-lg border border-white/10 px-4 py-2.5 text-sm text-white/60 transition hover:border-[#D8B86A]/50 hover:text-[#D8B86A]"
-            >
-              Contact
-              <ArrowUpRight size={14} />
-            </a>
+            <div className="mt-5 space-y-3">
+              {informationLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block text-sm text-white/60 transition hover:text-[#D8B86A]"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/10">
-        <div className="sc-container flex flex-col gap-4 py-6 text-xs text-white/35 md:flex-row md:items-center md:justify-between">
-          <p>
-            © {new Date().getFullYear()} Supreme Court of India.
-            All rights reserved.
-          </p>
+        <div className="mt-12 border-t border-white/10 pt-6">
+          <div className="flex flex-col justify-between gap-3 text-xs text-white/40 md:flex-row">
+            <p>
+              © 2026 Supreme Court of India Redesign.
+            </p>
 
-          <div className="flex flex-wrap gap-5">
-            <a
-              href="#"
-              className="transition hover:text-white/70"
-            >
-              Privacy
-            </a>
-
-            <a
-              href="#"
-              className="transition hover:text-white/70"
-            >
-              Accessibility
-            </a>
-
-            <a
-              href="#"
-              className="transition hover:text-white/70"
-            >
-              Terms
-            </a>
-
-            <a
-              href="#"
-              className="transition hover:text-white/70"
-            >
-              Sitemap
-            </a>
+            <p>
+              Frontend concept · No backend connected
+            </p>
           </div>
         </div>
       </div>

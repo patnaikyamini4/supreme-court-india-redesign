@@ -1,45 +1,80 @@
-import Link from "next/link";
+"use client";
 
-const navigationItems = [
-  { label: "Home", href: "/" },
-  { label: "Court", href: "/court" },
-  { label: "Cases", href: "/cases" },
-  { label: "Judgments", href: "/judgments" },
-  { label: "Orders", href: "/orders" },
-  { label: "Notices", href: "/notices" },
-  { label: "Cause List", href: "/cause-list" },
-  { label: "Services", href: "/services" },
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const navigation = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "Court",
+    href: "/court",
+  },
+  {
+    label: "Cases",
+    href: "/cases",
+  },
+  {
+    label: "Judgments",
+    href: "/judgments",
+  },
+  {
+    label: "Orders",
+    href: "/orders",
+  },
+  {
+    label: "Notices",
+    href: "/notices",
+  },
+  {
+    label: "Cause List",
+    href: "/cause-list",
+  },
+  {
+    label: "Services",
+    href: "/services",
+  },
 ];
 
 export default function DesktopNav() {
+  const pathname = usePathname();
+
   return (
     <nav
-      className="hidden border-b border-slate-200 bg-white md:block"
       aria-label="Primary navigation"
+      className="hidden border-b border-slate-200 bg-white lg:block"
     >
       <div className="sc-container">
-        <div className="flex h-14 items-center gap-7 overflow-x-auto">
-          {navigationItems.map((item, index) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={`
-                relative flex h-full shrink-0 items-center
-                text-sm font-medium transition-colors
-                ${
-                  index === 0
-                    ? "text-[#B38A3E]"
-                    : "text-slate-600 hover:text-[#0B1F33]"
-                }
-              `}
-            >
-              {item.label}
+        <div className="flex min-h-[58px] items-center gap-8">
+          {navigation.map((item) => {
+            const isActive =
+              item.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(item.href);
 
-              {index === 0 && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B38A3E]" />
-              )}
-            </Link>
-          ))}
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive ? "page" : undefined}
+                className={`relative flex min-h-[58px] items-center text-sm font-medium transition ${
+                  isActive
+                    ? "text-[#B38A3E]"
+                    : "text-[#0B1F33] hover:text-[#B38A3E]"
+                }`}
+              >
+                {item.label}
+
+                <span
+                  className={`absolute bottom-0 left-0 h-[2px] bg-[#B38A3E] transition-all duration-200 ${
+                    isActive ? "w-full" : "w-0"
+                  }`}
+                />
+              </Link>
+            );
+          })}
         </div>
       </div>
     </nav>
