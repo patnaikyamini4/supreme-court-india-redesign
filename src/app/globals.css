@@ -1,19 +1,32 @@
 @import "tailwindcss";
 
+/* =========================================================
+   SUPREME COURT OF INDIA — DESIGN SYSTEM
+   ========================================================= */
+
 :root {
-  --sc-navy: #0b1f33;
-  --sc-deep-navy: #071624;
-  --sc-ivory: #f7f5ef;
-  --sc-gold: #b38a3e;
-  --sc-gold-light: #d8b86a;
+  --court-navy: #0b1f33;
+  --court-navy-light: #102a43;
 
-  --sc-text: #1b2733;
-  --sc-muted: #667085;
-  --sc-border: #e4e7ec;
+  --court-gold: #b38a3e;
+  --court-gold-light: #d8b86a;
 
-  --background: #ffffff;
-  --foreground: var(--sc-text);
+  --court-cream: #f7f5ef;
+  --court-white: #ffffff;
+
+  --court-text: #0b1f33;
+  --court-muted: #64748b;
+
+  --court-border: #e2e8f0;
+  --court-border-light: #f1f5f9;
+
+  --background: #f7f5ef;
+  --foreground: #0b1f33;
 }
+
+/* =========================================================
+   RESET
+   ========================================================= */
 
 * {
   box-sizing: border-box;
@@ -23,21 +36,48 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
 body {
   margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
   background: var(--background);
   color: var(--foreground);
+  overflow-x: hidden;
+
   font-family:
     Arial,
     Helvetica,
     sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* =========================================================
+   BUTTONS / FORM ELEMENTS
+   ========================================================= */
+
 button,
-a,
 input,
-textarea,
-select {
+select,
+textarea {
   font: inherit;
 }
 
@@ -45,26 +85,32 @@ button {
   cursor: pointer;
 }
 
-a {
-  text-decoration: none;
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
+
+/* =========================================================
+   KEYBOARD ACCESSIBILITY
+   ========================================================= */
+
+:focus-visible {
+  outline: 3px solid var(--court-gold);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   TEXT SELECTION
+   ========================================================= */
 
 ::selection {
-  background: var(--sc-gold);
-  color: #ffffff;
+  background: var(--court-gold-light);
+  color: var(--court-navy);
 }
 
-/* ---------------------------------------
-   Supreme Court Design Utilities
----------------------------------------- */
-
-.sc-container {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
-}
+/* =========================================================
+   COURT TYPOGRAPHY
+   ========================================================= */
 
 .sc-serif {
   font-family:
@@ -74,74 +120,302 @@ a {
     serif;
 }
 
-.sc-section {
-  padding-top: 80px;
-  padding-bottom: 80px;
-}
-
 .sc-eyebrow {
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 0.7rem;
+  line-height: 1rem;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--sc-gold);
 }
 
-.sc-heading {
-  margin-top: 8px;
-  font-family:
-    Georgia,
-    "Times New Roman",
-    Times,
-    serif;
-  font-size: clamp(30px, 4vw, 44px);
-  line-height: 1.15;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  color: var(--sc-navy);
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.sc-container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
-.sc-muted {
-  color: var(--sc-muted);
+/* =========================================================
+   SECTION SPACING
+   ========================================================= */
+
+.sc-section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
+
+/* =========================================================
+   CARD SYSTEM
+   ========================================================= */
+
+.sc-card {
+  border: 1px solid var(--court-border);
+  border-radius: 1rem;
+  background: var(--court-white);
+
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+
+.sc-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(179, 138, 62, 0.45);
+  box-shadow:
+    0 12px 30px rgba(11, 31, 51, 0.08);
+}
+
+/* =========================================================
+   GOLD ACCENT
+   ========================================================= */
 
 .sc-gold {
-  color: var(--sc-gold);
+  color: var(--court-gold);
 }
 
-.sc-navy {
-  color: var(--sc-navy);
+.sc-gold-bg {
+  background-color: var(--court-gold);
 }
 
-.sc-ivory {
-  background: var(--sc-ivory);
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.sc-nav-link {
+  position: relative;
+  color: var(--court-navy);
+
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  transition:
+    color 180ms ease;
 }
 
-.sc-navy-bg {
-  background: var(--sc-navy);
+.sc-nav-link:hover {
+  color: var(--court-gold);
 }
 
-.sc-deep-bg {
-  background: var(--sc-deep-navy);
+.sc-nav-link::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+
+  width: 0;
+  height: 2px;
+
+  background: var(--court-gold);
+
+  transition: width 180ms ease;
 }
 
-.sc-border {
-  border-color: var(--sc-border);
+.sc-nav-link:hover::after {
+  width: 100%;
 }
 
-/* ---------------------------------------
-   Responsive Container
----------------------------------------- */
+/* =========================================================
+   SEARCH INPUT
+   ========================================================= */
+
+.sc-search {
+  border: 1px solid var(--court-border);
+  background: var(--court-white);
+  color: var(--court-text);
+
+  border-radius: 999px;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.sc-search:focus {
+  border-color: var(--court-gold);
+
+  box-shadow:
+    0 0 0 3px rgba(179, 138, 62, 0.12);
+
+  outline: none;
+}
+
+.sc-search::placeholder {
+  color: #94a3b8;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.sc-hero {
+  background:
+    linear-gradient(
+      135deg,
+      var(--court-navy) 0%,
+      var(--court-navy-light) 100%
+    );
+
+  color: var(--court-white);
+}
+
+/* =========================================================
+   GOLD DIVIDER
+   ========================================================= */
+
+.sc-divider {
+  width: 4rem;
+  height: 2px;
+
+  background: var(--court-gold);
+}
+
+/* =========================================================
+   PAGE TRANSITIONS
+   ========================================================= */
+
+.sc-fade-in {
+  animation: scFadeIn 500ms ease both;
+}
+
+@keyframes scFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   TOUCH TARGETS
+   ========================================================= */
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (pointer: coarse) {
+  button,
+  a {
+    min-height: 40px;
+  }
+}
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   IMAGES
+   ========================================================= */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media (max-width: 640px) {
   .sc-container {
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .sc-section {
-    padding-top: 56px;
-    padding-bottom: 56px;
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .sc-eyebrow {
+    font-size: 0.625rem;
+    letter-spacing: 0.15em;
+  }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .sc-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1440px) {
+  .sc-container {
+    max-width: 1360px;
+  }
+}
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  button,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+
+  .sc-container {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
